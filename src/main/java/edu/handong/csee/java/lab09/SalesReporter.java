@@ -1,6 +1,13 @@
 package edu.handong.csee.java.lab09;
 
-import java.util.Scanner;
+import java.util.Scanner; // import scanner utility to get user input
+
+/**
+ * SalesReporter class. Contains main method and input method getData,
+ * calculating method computeAverage, computeTightestSales, printResults
+ * @author Admin
+ *
+ */
 public class SalesReporter {
 	
 	private double highestSales = 0;

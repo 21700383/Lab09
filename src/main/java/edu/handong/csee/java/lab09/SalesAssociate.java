@@ -1,5 +1,11 @@
 package edu.handong.csee.java.lab09;
 
+/**
+ * SalesAssociate class containing constructor, set methods setName and setSales,
+ * get methods getName and getSales which will be used in SalesReporter.java.
+ * @author Admin
+ *
+ */
 public class SalesAssociate {
 	
 	private String name;
