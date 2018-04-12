@@ -1,5 +1,6 @@
 package edu.handong.csee.java.lab09;
 
+import java.util.ArrayList;
 import java.util.Scanner; // import scanner utility to get user input
 
 /**
@@ -12,7 +13,7 @@ public class SalesReporter { // declare class
 	
 	private double highestSales = 0; // set highestSales as private double and set the value as 0
 	private double averageSales = 0; // set averageSales as private double and set the value as 0
-	private  SalesAssociate[] team; // set team as array of private SalesAssociate constructor type
+	private  ArrayList<SalesAssociate> team;
 	
 	/**
 	 * getData method which tells the user to input the number of salesmen, then for that amount of salesmen,
@@ -21,21 +22,28 @@ public class SalesReporter { // declare class
 	public void getData() { // declare method
 		System.out.println("Enter the number of salesmen: "); // tell the user to input number of salesmen
 		Scanner myKeyboard = new Scanner(System.in); // to get input from user keyboard
-
-		int numOfSalesmen = myKeyboard.nextInt(); // get the next integer input from the keyboard
 		
-		team = new SalesAssociate[numOfSalesmen]; // create input number of arrays with SalesAssociate type and name it as team
+		team = new  ArrayList<SalesAssociate>();
 		
-		for(int i = 0; i < numOfSalesmen; i++) { // make a loop which repeats until reaching numOfSalesmen
-			System.out.println("Enter data for associate number" + (i+1) + ":"); // tell user to input data for nth salesman
+		boolean done = false;
+		
+		while(done != true) { // make a loop which repeats until the wants to finish putting data
+			int i = 0;
+			i++;
+			System.out.println("Enter data for associate number" + i + ":"); // tell user to input data for nth salesman
 			System.out.print("Name? "); // tell user to input name
 			myKeyboard.nextLine(); // eats enter
 			String name = myKeyboard.nextLine(); // get user input for name as string
 			System.out.print("Sales? "); // tell user to input sales
 			double sales = myKeyboard.nextDouble(); // get user input for sales as double
-			team[i] = new SalesAssociate(); // construct salesman's data
-			team[i].setName(name); // set salesman's name from user input
-			team[i].setSales(sales); // set salesman's sales from user input
+			SalesAssociate member = new SalesAssociate();
+			member.setName(name);
+			member.setSales(sales);
+			team.add(member);
+			System.out.println("Do you want to add new salesman?(Y/N)");
+			myKeyboard.nextLine();
+			if(myKeyboard.nextLine() == "N")
+				done = true;
 			
 		}
 	}
@@ -45,15 +53,15 @@ public class SalesReporter { // declare class
 	public void computeAverage() { //declare method
 		double sum = 0; // declare sum as double and set it as 0;
 		
-		for(int i = 0; i < team.length; i++) { // make a loop which repeats until reaching the last member of team
-			sum = sum + team[i].getSales(); // equation for sum of entire sales from all salesmen
+		for(SalesAssociate member:team) { // make a loop which repeats until reaching the last member of team
+			sum = sum + member.getSales(); // equation for sum of entire sales from all salesmen
 		}
-		averageSales = sum / team.length; // equation for average sale of all salesmen, stored as averageSales
+		averageSales = sum / team.size(); // equation for average sale of all salesmen, stored as averageSales
 	}
 	/**
-	 * computeTightestSales method which compute to find the salesman with highest sales.
+	 * computeHightestSales method which compute to find the salesman with highest sales.
 	 */
-	public void computeTightestSales() { // declare method
+	public void computeHightestSales() { // declare method
 		
 		double highestSales = 0; // declare local highestSales as double and set it as 0;
 		
@@ -96,7 +104,7 @@ public class SalesReporter { // declare class
 		SalesReporter analyzer = new SalesReporter(); // set analyzer to the structure of SalesReporter class
 		analyzer.getData(); // call getData in SalesReporter
 		analyzer.computeAverage(); // call computeAverage in SalesReporter
-		analyzer.computeTightestSales(); // call computeTighestSales in SalesReporter
+		analyzer.computeHightestSales(); // call computeTighestSales in SalesReporter
 		analyzer.printResults(); // call printResults in SalesReporter
 		}
 
